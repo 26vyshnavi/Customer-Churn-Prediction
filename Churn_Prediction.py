@@ -39,6 +39,7 @@ print(data.head())
 
 # In[4]:
 
+pip install scikit-learn
 
 from sklearn.preprocessing import StandardScaler
 
