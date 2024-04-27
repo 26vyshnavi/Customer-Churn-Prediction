@@ -37,25 +37,6 @@ print("First few rows of the updated dataset:")
 print(data.head())
 
 
-# In[4]:
-
-
-from sklearn.preprocessing import StandardScaler
-
-# Initialize StandardScaler
-scaler = StandardScaler()
-
-# Select numerical features for scaling
-numerical_features = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary']
-
-# Scale the numerical features
-data[numerical_features] = scaler.fit_transform(data[numerical_features])
-
-# Display the first few rows of the scaled dataset
-print("First few rows of the scaled dataset:")
-print(data.head())
-
-
 # In[5]:
 
 
