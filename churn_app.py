@@ -70,7 +70,7 @@ if __name__ == "__main__":
                        initial_sidebar_state="auto")
     st.markdown(hide_default_format, unsafe_allow_html=True)
 
-    df_train = pd.read_csv(str(Path(__file__).parents[1] / 'data/churn_data.csv'))
+    df_train = pd.read_csv(str(Path(__file__).parents[1] / 'churn.csv'))
 
     # Displaying text
     st.title("Bank Customer Churn Prediction")
