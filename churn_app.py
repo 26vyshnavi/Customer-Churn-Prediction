@@ -75,7 +75,7 @@ if __name__ == "__main__":
     # Displaying text
     st.title("Bank Customer Churn Prediction")
     # Displaying an image
-    image_path = str(Path(__file__).parents[1] / 'img/customer_churn.png')
+    image_path = str(customer_churn.png)
     print("Image Path:", image_path)  # Add this line for debugging
     st.image(image_path, width=700)
 
