@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[9]:
 
 
 # Import necessary libraries
@@ -14,7 +14,7 @@ print("First few rows of the dataset:")
 print(data.head())
 
 
-# In[3]:
+# In[10]:
 
 
 # Check for missing values
@@ -22,7 +22,7 @@ print("Missing values in the dataset:")
 print(data.isnull().sum())
 
 
-# In[4]:
+# In[11]:
 
 
 # Perform one-hot encoding for 'Geography' column
@@ -36,13 +36,7 @@ print("First few rows of the updated dataset:")
 print(data.head())
 
 
-# In[5]:
-
-
-pip install scikit-learn
-
-
-# In[6]:
+# In[12]:
 
 
 from sklearn.preprocessing import StandardScaler
@@ -61,7 +55,7 @@ print("First few rows of the scaled dataset:")
 print(data.head())
 
 
-# In[7]:
+# In[14]:
 
 
 from sklearn.model_selection import train_test_split
@@ -80,7 +74,7 @@ print("Shape of y_train:", y_train.shape)
 print("Shape of y_test:", y_test.shape)
 
 
-# In[8]:
+# In[15]:
 
 
 from sklearn.linear_model import LogisticRegression
@@ -102,7 +96,7 @@ print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 
 
-# In[9]:
+# In[16]:
 
 
 from sklearn.model_selection import GridSearchCV
@@ -141,7 +135,7 @@ print("\nConfusion Matrix with Best Hyperparameters:")
 print(confusion_matrix(y_test, y_pred_best))
 
 
-# In[10]:
+# In[17]:
 
 
 from sklearn.ensemble import RandomForestClassifier
@@ -162,7 +156,7 @@ print("\nConfusion Matrix with Random Forest:")
 print(confusion_matrix(y_test, y_pred_rf))
 
 
-# In[11]:
+# In[18]:
 
 
 # Define hyperparameters to tune
@@ -201,7 +195,7 @@ print("\nConfusion Matrix with Best Hyperparameters for Random Forest:")
 print(confusion_matrix(y_test, y_pred_best_rf))
 
 
-# In[12]:
+# In[19]:
 
 
 import matplotlib.pyplot as plt
@@ -223,7 +217,7 @@ plt.ylabel('Feature')
 plt.show()
 
 
-# In[13]:
+# In[20]:
 
 
 from imblearn.over_sampling import SMOTE
@@ -248,13 +242,13 @@ print("\nConfusion Matrix with SMOTE:")
 print(confusion_matrix(y_test, y_pred_rf_smote))
 
 
-# In[14]:
+# In[21]:
 
 
 pip install xgboost
 
 
-# In[15]:
+# In[22]:
 
 
 import xgboost as xgb
@@ -290,6 +284,81 @@ plt.ylabel('Feature')
 plt.show()
 
 
+# In[23]:
+
+
+# Saving best model
+import joblib
+# Save the model to disk
+filename = 'best_rf_model.sav'  
+joblib.dump(best_rf_model, filename)
+
+
+# In[24]:
+
+
+# Load the saved model from disk
+import joblib
+model = joblib.load('best_rf_model.sav')
+
+
+# In[44]:
+
+
+import streamlit as st
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import joblib
+
+# Load the trained model
+model = joblib.load('best_rf_model.sav')
+
+# Define the Streamlit app
+def main():
+    st.title("Churn Prediction App")
+    st.write("This app predicts whether a customer will churn or not.")
+
+    # Add file uploader to upload CSV data
+    uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
+
+    if uploaded_file is not None:
+        # Load the uploaded data into a DataFrame
+        data = pd.read_csv(uploaded_file)
+
+        # Preprocess the data
+        data = preprocess_data(data)
+
+        # Make predictions
+        predictions = model.predict(data)
+
+        # Display predictions
+        st.write("Predictions:")
+        st.write(predictions)
+
+# Function to preprocess the data
+def preprocess_data(data):
+    # Perform one-hot encoding for 'Geography' column
+    data = pd.get_dummies(data, columns=['Geography'], drop_first=True)
+
+    # Binary encode 'Gender' column (Female: 0, Male: 1)
+    data['Gender'] = data['Gender'].map({'Female': 0, 'Male': 1})
+
+    # Scale the numerical features
+    scaler = StandardScaler()
+    numerical_features = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary']
+    data[numerical_features] = scaler.fit_transform(data[numerical_features])
+
+    return data
+
+# Run the Streamlit app
+if __name__ == "__main__":
+    main()
+
+
+# In[ ]:
 
 
 
