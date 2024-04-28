@@ -9,7 +9,7 @@ def get_user_input(df_train):
     left, right = st.columns(2)
     with left:
         # add element on the left side
-        st.write(f"**Customer's Personal Information**")
+        st.write(f"**Customer's Information**")
         geography = st.radio('To which country does the customer belong?',
                              df_train['Geography'].unique(), horizontal=True, index=1)
         gender = st.radio('What is the gender of the customer?',
@@ -22,7 +22,7 @@ def get_user_input(df_train):
                                  int(df_train['CreditScore'].mean()))
         estimated_salary = st.slider("What is Customer Estimated Salary?",
                                      0,
-                                     200000,
+                                     300000,
                                      int(df_train['EstimatedSalary'].mean()))
     with right:
         # add element on the right side
@@ -70,15 +70,12 @@ if __name__ == "__main__":
                        initial_sidebar_state="auto")
     st.markdown(hide_default_format, unsafe_allow_html=True)
 
-    df_train = pd.read_csv('churn.csv')
+    df_train = pd.read_csv(str(Path(__file__).parents[1] / 'data/churn_data.csv'))
 
     # Displaying text
     st.title("Bank Customer Churn Prediction")
     # Displaying an image
-    image_path = str(Path(__file__).parents[1] / 'https://github.com/26vyshnavi/Customer-Churn-Prediction/blob/main/customer_churn.png')
-    print("Image Path:", image_path)  # Add this line for debugging
-    st.image(image_path, width=700)
-
+    st.image(str(Path(__file__).parents[1] / 'img/customer_churn.png'), width=700)
 
     st.write("""  
              Customer churn, refers to customers discontinuing their relationship with a business or organization. In the banking industry, predicting customer churn is of great importance as it allows banks to address customer needs, improve retention strategies, and save costs associated with acquiring new customers.\n
