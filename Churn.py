@@ -442,11 +442,6 @@ import joblib
 filename = 'model.sav'
 joblib.dump(log_model, filename)
 
-# In[28]:
-
-
-pip install --upgrade Pillow
-
 
 # In[30]:
 
