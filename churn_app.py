@@ -75,7 +75,10 @@ if __name__ == "__main__":
     # Displaying text
     st.title("Bank Customer Churn Prediction")
     # Displaying an image
-    st.image(str(Path(__file__).parents[1] / 'img/customer_churn.png'), width=700)
+    image_path = str(Path(__file__).parents[1] / 'img/customer_churn.png')
+    print("Image Path:", image_path)  # Add this line for debugging
+    st.image(image_path, width=700)
+
 
     st.write("""  
              Customer churn, refers to customers discontinuing their relationship with a business or organization. In the banking industry, predicting customer churn is of great importance as it allows banks to address customer needs, improve retention strategies, and save costs associated with acquiring new customers.\n
