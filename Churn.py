@@ -9,6 +9,8 @@ import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 pd.set_option('display.max_columns', None)
 
+pip install ploty 
+
 import plotly.express as px #for visualization
 import matplotlib.pyplot as plt #for visualization 
 
