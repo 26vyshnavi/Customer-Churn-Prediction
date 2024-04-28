@@ -290,14 +290,6 @@ plt.ylabel('Feature')
 plt.show()
 
 
-# In[16]:
-
-
-pip install --upgrade zmq streamlit
-
-
-# In[ ]:
-
 
 
 
