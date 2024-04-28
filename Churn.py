@@ -442,13 +442,6 @@ import joblib
 filename = 'model.sav'
 joblib.dump(log_model, filename)
 
-
-# In[27]:
-
-
-pip install preprocessing
-
-
 # In[28]:
 
 
